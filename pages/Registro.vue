@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 style="width: 100%; text-align: center;">Registro de Usuarios</h1>
-        <v-card style="width: 100%; align-items: center;" class="ma-2 pa-10" density="compact">
+        <v-card style="width: 100%; align-items: center;" class="px-8" density="compact">
             <form @submit.prevent="submit">
             
             <!-- Nombre -->
