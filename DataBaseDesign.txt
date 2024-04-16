@@ -1,0 +1,67 @@
+https://dbdiagram.io/d/6618530f03593b6b61cb8a89
+
+Table users {
+  id integer [primary key]
+  email varchar [not null, unique]
+  password varchar [not null]
+  full_name varchar
+  date_of_birth date
+  phone_number varchar
+  height decimal(5,2)
+  weight decimal(5,2)
+  has_anxiety boolean
+  has_diabetes boolean
+  has_blood_pressure_problems boolean
+  has_depression boolean
+  has_cancer boolean
+  address varchar
+}
+
+Table pharmacies {
+  id integer [primary key]
+  name varchar
+  email varchar [not null, unique]
+  password varchar [not null]
+  manager_name varchar
+  manager_last_name varchar
+  phone_number varchar
+  branch_number integer
+  address varchar
+}
+
+Table pharmacy_hours {
+  id integer [primary key]
+  pharmacy_id integer [ref: > pharmacies.id]
+  day_of_week varchar [note: 'Values: Monday, Tuesday, ..., Sunday']
+  opening_time time
+  closing_time time
+}
+
+Table medications {
+  id integer [primary key]
+  name varchar
+  price decimal(8,2)
+  quantity integer
+  pharmacy_id integer [ref: > pharmacies.id]
+}
+
+Table medication_discounts {
+  id integer [primary key]
+  medication_id integer [ref: > medications.id]
+  discount_amount decimal(5,2)
+  start_date date
+  end_date date
+}
+
+Table user_medications {
+  id integer [primary key]
+  user_id integer [ref: > users.id]
+  medication_name varchar
+}
+
+Table medication_logs {
+  id integer [primary key]
+  medication_id integer [ref: > medications.id]
+  quantity_sold integer
+  sale_date timestamp
+}
