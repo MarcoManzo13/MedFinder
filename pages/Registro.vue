@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 style="width: 100%; text-align: center;">Registro de Usuarios</h1>
+        <div class="text-h4 text-center my-10"> Registro Usuarios</div>
         <v-card style="width: 100%; align-items: center;" class="px-8" density="compact">
             <form @submit.prevent="submit">
             
@@ -158,6 +158,9 @@
     
     export default {
     setup() {
+        definePageMeta({
+  layout: false,
+});
         const mostrarContrasena = ref(false);
         const mostrarConfirmarContrasena = ref(false);
     
