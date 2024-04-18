@@ -4,6 +4,7 @@
             <v-app-bar flat>
                 
                 <v-app-bar-title style="text-align: left;">MedFinder</v-app-bar-title>
+                <v-img src="../assets/logo.png" style="width: 0px; margin-left: 5px;" />
                 <template v-slot:prepend>
                     <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 </template>
@@ -75,6 +76,7 @@
                     { to: "/RegistroFarmacia", title: 'Registro Farmacia', icon: 'mdi-account-multiple-plus-outline', value: 'registroFarmacia' },
                     { to: "/IniciarSesion", title: 'Iniciar Sesión', icon: 'mdi-account-multiple-check-outline', value: 'iniciarSesion' },
                     { to: "/UsuarioOFarmacia", title: 'Usuario O Farmacia', icon: 'mdi-account-hard-hat-outline', value: 'usuarioFarmacia' },
+                    { to: "/FiltrosBusqueda", title: 'Filtros de búsqueda', icon: 'mdi-filter-menu', value: 'FiltrosBusqueda'},
                 ],
             }
         },
