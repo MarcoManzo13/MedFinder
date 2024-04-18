@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card style="width: 100%; align-items: center;" class="px-8 d-flex justify-center align-center flex-column" density="compact" >
-            <v-img src="../assets/LogoInicioSesion.png" style="width: 80%;" class="mt-7"/>
+            <v-img src="../assets/logo.png" style="width: 80%;" class="mt-7"/>
             <h1 style="width: 100%; text-align: center;">Iniciar Sesión</h1>
             <form @submit.prevent="submit">
         
