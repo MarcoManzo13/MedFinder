@@ -25,17 +25,6 @@
                     </v-btn>
                 </template>
             </v-app-bar>
-            <v-app-bar flat>
-                <v-text-field
-                    placeholder="Buscar medicinas"
-                    prepend-inner-icon="mdi-filter-menu"
-                    append-inner-icon="mdi-magnify"
-                    single-line
-                    hide-details
-                    dense
-                    class="mx-5"
-                />
-            </v-app-bar>
 
             <v-navigation-drawer
                 v-model="drawer"
