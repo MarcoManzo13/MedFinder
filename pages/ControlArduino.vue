@@ -1,7 +1,7 @@
 <template>
     <div>
         <label for="led-value">LED Status:</label>
-    <input type="text" id="led-value" v-model="ledValue" placeholder="Eneter LED Value" />
+    <input type="number" id="led-value" v-model.number="ledValue" placeholder="Enter LED Value" />
     <v-btn @click="changeLEDValue">Save</v-btn>
     </div>
 </template>
@@ -12,15 +12,21 @@ import { getDatabase, ref, set } from "firebase/database";
 export default {
     data() {
         return {
-            ledValue: ""
+            ledValue: null
         };
     },
     methods: {
         changeLEDValue() {
-            const db = getDatabase(this.$firebaseApp);
-            const ledRef = ref(db, 'led/');
-            set(ledRef, this.ledValue);
-            this.ledValue = ""; 
+            // Check if ledValue is not null and is a number
+            if (this.ledValue !== null && !isNaN(this.ledValue)) {
+                const db = getDatabase(this.$firebaseApp);
+                const ledRef = ref(db, 'led/');
+                set(ledRef, parseInt(this.ledValue)); // Parse ledValue to integer
+                this.ledValue = null; // Reset to null after sending
+            } else {
+                // Handle error, invalid input
+                console.error("Invalid LED value. Please enter a valid number.");
+            }
         }
     }
 };

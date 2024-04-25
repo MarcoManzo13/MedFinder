@@ -25,7 +25,7 @@ void setup()
     // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   // Print a message to the LCD.
-  lcd.print("hello, world! heloooooooooooodssssssssssssssssssssssssssssssssssssssssssssssssss");
+  lcd.print("Advil refill");
 
   // Initialize the Serial
   Serial.begin(9600);
