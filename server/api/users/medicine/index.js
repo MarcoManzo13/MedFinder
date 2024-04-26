@@ -13,17 +13,15 @@ export default defineEventHandler(async (event) => {
           throw createError({ statusCode: 500, message: err.message });
       }
   } else if (method === 'POST') {
-      try {
-          const body = await readBody(event);
-          console.log('Received form data:', body);
-
-          // Guarda la instancia del modelo y espera a que se complete
-          await new model(body).save();
-          return { message: 'Medicine created' };
-      } catch (err) {
-          // Especificar un código de estado también aquí
-          throw createError({ statusCode: 500, message: err.message });
-      }
+    try {
+      const body = await readBody(event);
+      const newMedicine = new model(body);
+      await newMedicine.save(); // Save the new medicine instance
+      return { message: 'Medicine created successfully' };
+    } catch (err) {
+      console.error('Error creating medicine:', err);
+      throw createError({ statusCode: 500, message: 'Failed to create medicine' });
+    }
   } else {
       // Manejar otros métodos no soportados
       throw createError({ statusCode: 405, message: 'Method Not Allowed' });
