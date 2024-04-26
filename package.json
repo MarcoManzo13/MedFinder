@@ -12,13 +12,15 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@vee-validate/nuxt": "^4.12.6",
-    "johnny-five": "^2.1.0",
+    "firebase": "^10.11.0",
     "mongoose": "^8.3.0",
     "nuxt": "^3.11.1",
     "nuxt-icon": "^0.6.10",
+    "nuxt-vuefire": "^1.0.2",
     "sass": "^1.74.1",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vuefire": "^3.1.23"
   },
   "devDependencies": {
     "vite-plugin-vuetify": "^2.0.3",
