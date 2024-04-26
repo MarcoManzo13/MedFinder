@@ -66,6 +66,7 @@
                     { to: "/IniciarSesion", title: 'Iniciar Sesión', icon: 'mdi-account-multiple-check-outline', value: 'iniciarSesion' },
                     { to: "/UsuarioOFarmacia", title: 'Usuario O Farmacia', icon: 'mdi-account-hard-hat-outline', value: 'usuarioFarmacia' },
                     { to: "/FiltrosBusqueda", title: 'Filtros de búsqueda', icon: 'mdi-filter-menu', value: 'FiltrosBusqueda'},
+                    { to: "/ControlArduino", title: 'Control Arduino', icon: 'mdi-robot', value: 'ControlArduino'},
                 ],
             }
         },

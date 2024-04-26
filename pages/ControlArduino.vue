@@ -1,30 +1,35 @@
 <template>
     <div>
-        <v-button @click="turnOnLed">
-            Turn on LED
-        </v-button>
+        <label for="led-value">LED Status:</label>
+    <input type="number" id="led-value" v-model.number="ledValue" placeholder="Enter LED Value" />
+    <v-btn @click="changeLEDValue">Save</v-btn>
     </div>
 </template>
 
-<script>
-import five from 'johnny-five';
-import connectArduino from './arduino'; // Import the Arduino connection function
+<script> 
+import { getDatabase, ref, set } from "firebase/database";
 
 export default {
+    data() {
+        return {
+            ledValue: null
+        };
+    },
     methods: {
-        async turnOnLed() {
-            try {
-                const board = connectArduino(five.Arduino, '/dev/ttyUSB0'); // Connect to Arduino
-                board.on('ready', function() { // Handle 'ready' event before interacting with the board
-                    const led = new five.Led(13); // Define LED on pin 13
-                    led.strobe(2000); // Cada 2 segundos se prende y apaga
-                });
-            } catch (error) {
-                console.error('Error connecting to Arduino:', error);
+        changeLEDValue() {
+            // Check if ledValue is not null and is a number
+            if (this.ledValue !== null && !isNaN(this.ledValue)) {
+                const db = getDatabase(this.$firebaseApp);
+                const ledRef = ref(db, 'led/');
+                set(ledRef, parseInt(this.ledValue)); // Parse ledValue to integer
+                this.ledValue = null; // Reset to null after sending
+            } else {
+                // Handle error, invalid input
+                console.error("Invalid LED value. Please enter a valid number.");
             }
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

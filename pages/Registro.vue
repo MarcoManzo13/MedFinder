@@ -159,7 +159,7 @@
     export default {
     setup() {
         definePageMeta({
-  layout: false,
+    layout: false,
 });
         const mostrarContrasena = ref(false);
         const mostrarConfirmarContrasena = ref(false);
@@ -189,7 +189,6 @@
                 confirmarContrasena (value) {
                     if (value !== contrasena.value.value) return 'Las contraseñas no coinciden.'
                     return true
-                    
                 },
                 genero (value) {
                     if (value) return true
