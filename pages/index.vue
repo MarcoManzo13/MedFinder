@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-10">
         <div flat class="mx-10">
             <v-text-field
                 label="Buscar medicinas"
@@ -78,13 +78,13 @@
                 </v-card-text>
             </v-card>
         </div>
-        <div class="mx-10 my-5">
+        <div class="ma-10">
             <h3>Medicamentos disponibles</h3>
             <ul style= "list-style: none;">
                 <li v-for="medicine in medicines" :key="medicine.id" class="my-5">
                     <v-card>
                         <v-card-title>
-                            {{ medicine.name }}
+                            {{ medicine.name }} ${{ medicine.price }}
                         </v-card-title>
                         <div v-for="subtitle in medicine.type" class="d-inline-flex flex-row">
                             <v-card-subtitle>
@@ -93,10 +93,13 @@
                         </div>
                         <v-card-text>
                             {{ medicine.description }}
+                            <br>
+                            <br>
+                            Dosis: {{ medicine.dosage }}
+                            <br>
+                            <br>
+                            Cantidad de medicamento en farmacia: {{ medicine.cuantity }}
                         </v-card-text>
-                        <v-btn class="ma-5" :to="'/medicines/' + medicine.name">
-                            Ver más
-                        </v-btn>
                     </v-card>
                 </li>
             </ul>
