@@ -60,7 +60,7 @@
                     <div v-if="medicinasFiltradas.length > 0">
                         <h2>Medicinas filtradas</h2>
                         <ul style="list-style: none;">
-                            <li v-for="medicine in medicines" :key="medicine.id" class="my-5">
+                            <li v-for="medicine in medicinasFiltradas" :key="medicine.id" class="my-5">
                                 <v-card>
                                     <v-card-title>
                                         {{ medicine.name }} ${{ medicine.price }}
@@ -163,23 +163,21 @@
             },
             async aplicarFiltros() {
                 try {
-                    // Filtrar datos localmente
+                  // Filtrar datos localmente
                     this.medicinasFiltradas = this.medicines.filter(medicine => {
                         let precioValido = true;
-                        let dosisValida = true;             
-                        // Verificar si se aplicaron filtros de precio y dosis
+                        let dosisValida = true;
+                      // Verificar si se aplicaron filtros de precio y dosis
                         if (this.filtroPrecio) {
-                            precioValido = medicine.price === parseInt(this.filtroPrecio);
+                            precioValido = medicine.price === parseInt(this.filtroPrecio);
                         }
                         if (this.filtroDosis) {
-                            dosisValida = medicine.dosage === this.filtroDosis;
+                            dosisValida = medicine.dosage === this.filtroDosis;
                         }
-
                         // Retornar true solo si tanto el precio como la dosis son válidos
                         return precioValido && dosisValida;
                     });
-                    // Set filtrosAplicados to true after filters are applied
-                    this.filtrosAplicados = true;
+                    console.log('Medicinas filtradas:', this.medicinasFiltradas);
                 } catch (error) {
                     console.error('Error en fetch:', error);
                 }
