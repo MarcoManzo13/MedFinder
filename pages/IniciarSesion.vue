@@ -29,18 +29,19 @@
                 ></v-text-field>
 
                 <!-- Botón Iniciar Sesión -->
-                <v-btn type="submit" class="my-2" style="width: 100%;">
+                <v-btn type="submit" class="my-2" color="green" style="width: 100%;">
                     Iniciar Sesión
                 </v-btn>
 
                 <!-- Botón reiniciar formulario -->
-                <v-btn @click="handleReset" class="my-2" style="width: 100%;">
+                <v-btn @click="handleReset" class="my-2" style="width: 100%;" color="red">
                     Borrar Formulario
                 </v-btn>
 
+                <!-- Botón para ir al Registro -->
                 <NuxtLink to="/UsuarioOFarmacia">
-                    <v-btn class="my-2" style="width: 100%;">
-                        Registrame
+                    <v-btn color="#10A8BF" style="width: 100%;" class="my-2">
+                        ¿No tienes cuenta? Regístrate
                     </v-btn>
                 </NuxtLink>
             </form>
@@ -49,48 +50,56 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useField, useForm } from 'vee-validate'
-import model from '../server/models/user'
+import { ref } from 'vue';
+import { useField, useForm } from 'vee-validate';
+import model from '../server/models/user';
+import { useRouter } from 'vue-router'; 
+
+definePageMeta({
+    layout: false,
+});
+
+const router = useRouter(); 
 
 console.log('Model:', model);
 
-const mostrarContrasena = ref(false); 
+const mostrarContrasena = ref(false);
 
 const { handleSubmit, handleReset } = useForm({
     validationSchema: {
         email(value) {
-            if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(value)) return true
-            return 'El correo debe ser válido'
+            if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(value)) return true;
+            return 'El correo debe ser válido';
         },
     },
-})
+});
 
-const email = useField('email')
-const contrasena = useField('contrasena')
+const email = useField('email');
+const contrasena = useField('contrasena');
 
 const usuarioBaseDatos = {
-    correo: 'usuario@dominio.com',
-    contrasena: 'Abcdef123!'
-}
+    correo: 'david@hotmail.com',
+    contrasena: '1111111111',
+};
 
 const submit = handleSubmit(values => {
     console.log('Valor ingresado de la contraseña:', values.contrasena);
     console.log('Contraseña almacenada en la base de datos:', usuarioBaseDatos.contrasena);
-    
+
     if (
         values.email === usuarioBaseDatos.correo && values.contrasena === usuarioBaseDatos.contrasena
     ) {
-        alert('Inicio de sesión exitoso.');
+        router.push('/');
     } else {
         alert('No se puede iniciar sesión, el correo o contraseña es incorrecta.');
     }
-})
+});
 
 definePageMeta({
     layout: false,
 });
 </script>
+
 
 <style scoped>
 

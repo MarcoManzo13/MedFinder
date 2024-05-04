@@ -2,27 +2,23 @@
     <div>
         <v-layout>
             <v-app-bar flat>
-                
-                <v-app-bar-title style="text-align: left;">MedFinder</v-app-bar-title>
-                <v-img src="../assets/logo.png" style="width: 0px; margin-left: 5px;" />
                 <template v-slot:prepend>
-                    <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+                    <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"/>
                 </template>
+                
                 <template v-slot:append>
-                    <v-btn
-                        target="_blank" 
-                        rel="noopener"
-                        href="https://www.linkedin.com/in/marcomanzoruiz/"
-                    >
-                        <Icon name="mdi:linkedin" size="2em" />
-                    </v-btn>
                     <v-btn
                         target="_blank" 
                         rel="noopener"
                         href="https://github.com/MarcoManzo13"
                     >
-                        <Icon name="mdi:github" size="2em" />
+                        <Icon name="mdi:star" size="2em" />
                     </v-btn>
+                    <v-img
+                        src="../assets/logo.png"
+                        :width="30"
+                        cover
+                    />
                 </template>
             </v-app-bar>
 
@@ -61,11 +57,11 @@
                 drawer: false,
                 menuItems: [
                     { to: "/", title: 'Inicio', icon: 'mdi-home-variant', value: 'inicio' },
-                    { to: "/Registro", title: 'Registro', icon: 'mdi-account-multiple-plus-outline', value: 'registro' },
+                    { to: "/Registro", title: 'Registro Usuario', icon: 'mdi-account-multiple-plus-outline', value: 'registro' },
                     { to: "/RegistroFarmacia", title: 'Registro Farmacia', icon: 'mdi-account-multiple-plus-outline', value: 'registroFarmacia' },
                     { to: "/IniciarSesion", title: 'Iniciar Sesión', icon: 'mdi-account-multiple-check-outline', value: 'iniciarSesion' },
                     { to: "/UsuarioOFarmacia", title: 'Usuario O Farmacia', icon: 'mdi-account-hard-hat-outline', value: 'usuarioFarmacia' },
-                    { to: "/FiltrosBusqueda", title: 'Filtros de búsqueda', icon: 'mdi-filter-menu', value: 'FiltrosBusqueda'},
+                    { to: "/CrearMedicamento", title: 'Añadir Medicamento', icon: 'mdi-medication', value: 'crearMedicamento' },
                     { to: "/ControlArduino", title: 'Control Arduino', icon: 'mdi-robot', value: 'ControlArduino'},
                 ],
             }

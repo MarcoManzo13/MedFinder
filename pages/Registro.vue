@@ -9,8 +9,9 @@
                 v-model="name.value.value"
                 :counter="20"
                 :error-messages="name.errorMessage.value"
-                label="Name(s)"
+                label="Nombre(s)"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Appelido -->
@@ -18,16 +19,18 @@
                 v-model="lastName.value.value"
                 :counter="20"
                 :error-messages="lastName.errorMessage.value"
-                label="Last Name(s)"
+                label="Apellido(s)"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Correo -->
             <v-text-field
                 v-model="email.value.value"
                 :error-messages="email.errorMessage.value"
-                label="E-mail"
+                label="Correo"
                 clearable
+                variant="outlined"
             ></v-text-field>
 
             <!-- Celular -->
@@ -35,8 +38,9 @@
                 v-model="celular.value.value"
                 :counter="10"
                 :error-messages="celular.errorMessage.value"
-                label="Cellphone"
+                label="Celular"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Contraseña -->
@@ -47,8 +51,9 @@
                 @click:prepend-inner="mostrarContrasena = !mostrarContrasena"
                 :counter="20"
                 :error-messages="contrasena.errorMessage.value"
-                label="Password"
+                label="Contraseña"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Confirmar Contraseña -->
@@ -59,8 +64,9 @@
                 @click:prepend-inner="mostrarConfirmarContrasena = !mostrarConfirmarContrasena"
                 :counter="20"
                 :error-messages="confirmarContrasena.errorMessage.value"
-                label="Confirm Password"
+                label="Confirmar Contraseña"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Género -->
@@ -68,30 +74,33 @@
                 v-model="genero.value.value"
                 :error-messages="genero.errorMessage.value"
                 :items="generoItems"
-                label="Gender"
+                label="Género"
                 clearable
+                variant="outlined"
             ></v-select>
             
             <!-- Altura -->
             <v-text-field
                 v-model="altura.value.value"
                 :counter="10"
-                label="Height"
+                label="Altura"
                 clearable
+                variant="outlined"
             ></v-text-field>
 
             <!-- Peso -->
             <v-text-field
                 v-model="peso.value.value"
                 :counter="10"
-                label="Weight"
+                label="Peso"
                 clearable
+                variant="outlined"
             ></v-text-field>
 
             <!-- Ansiedad -->
             <v-checkbox
                 v-model="ansiedad.value.value"
-                label="Anciety"
+                label="Anciedad"
                 type="checkbox"
                 value="1"
             ></v-checkbox>
@@ -102,12 +111,13 @@
                 :items="diabetesItems"
                 label="Diabetes"
                 clearable
+                variant="outlined"
             ></v-select>
     
             <!-- Problemas de Presión -->
             <v-checkbox
                 v-model="presion.value.value"
-                label="Arterial Hypertension"
+                label="Hipertensión Alterial"
                 type="checkbox"
                 value="1"
             ></v-checkbox>
@@ -115,7 +125,7 @@
             <!-- Depresión -->
             <v-checkbox
                 v-model="depresion.value.value"
-                label="Diagnosed Depression"
+                label="Depresión Diagnosticada"
                 type="checkbox"
                 value="1"
             ></v-checkbox>
@@ -124,28 +134,37 @@
             <v-select
                 v-model="cancer.value.value"
                 :items="cancerItems"
-                label="Cancer"
+                label="Cáncer"
                 clearable
+                variant="outlined"
             ></v-select>
 
             <!-- Términos y condiciones -->
             <v-checkbox
                 v-model="terminos.value.value"
                 :error-messages="terminos.errorMessage.value"
-                label="I accept terms and conditions."
+                label="Acepto los términos y condiciones."
                 type="checkbox"
                 value="1"
             ></v-checkbox>
     
-            <!-- Botón Registrarse -->
-            <v-btn class="me-4" type="submit">
-                Register
-            </v-btn>
-    
-            <!-- Botón reiniciar formulario -->
-            <v-btn @click="handleReset">
-                Erase Formulary
-            </v-btn>
+            <div class="d-flex align-center text-center justify-space-between flex-column mb-10">
+                <!-- Botón Registrarse -->
+                <v-btn class="my-2" type="submit" color="green" style="width: 100%;">
+                    Registrarse
+                </v-btn>
+                <!-- Botón reiniciar formulario -->
+                <v-btn @click="handleReset" color="red" class="my-2" style="width: 100%;">
+                    Borrar Formulario
+                </v-btn>
+                <!-- Botón para ir al inicio de sesión -->
+                <NuxtLink to="/IniciarSesion" class="my-2" style="width: 100%;">
+                    <v-btn color="#10A8BF" style="width: 100%;">
+                        ¿Ya tienes cuenta? Inicia Sesión
+                    </v-btn>
+                </NuxtLink>
+            </div>
+            
             </form>
         </v-card>
     </div>
@@ -155,14 +174,16 @@
     import { ref } from 'vue'
     import { useField, useForm } from 'vee-validate'
     import { useFetch } from 'nuxt/app'
+    import { useRouter } from 'vue-router'; 
     
     export default {
-    setup() {
-        definePageMeta({
-    layout: false,
-});
+        setup() {
+            definePageMeta({
+                layout: false,
+            });
         const mostrarContrasena = ref(false);
         const mostrarConfirmarContrasena = ref(false);
+        const router = useRouter(); 
     
         const { handleSubmit, handleReset } = useForm({
             validationSchema: {
@@ -246,10 +267,9 @@
                 presion: presion.value,
                 depresion: depresion.value,
                 cancer: cancer.value,
-            }
-    
+            },
         })
-            //alert(JSON.stringify(values, null, 2))
+            router.push('/IniciarSesion');
         })
     
         return {

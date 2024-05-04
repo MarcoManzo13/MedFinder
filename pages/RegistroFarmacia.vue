@@ -11,6 +11,7 @@
                 :error-messages="name.errorMessage.value"
                 label="Nombre(s)"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Appelido -->
@@ -20,6 +21,7 @@
                 :error-messages="lastName.errorMessage.value"
                 label="Apellido(s)"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Correo -->
@@ -28,6 +30,7 @@
                 :error-messages="email.errorMessage.value"
                 label="E-mail"
                 clearable
+                variant="outlined"
             ></v-text-field>
 
             <!-- Celular -->
@@ -37,6 +40,7 @@
                 :error-messages="celular.errorMessage.value"
                 label="Celular"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Contraseña -->
@@ -49,6 +53,7 @@
                 :error-messages="contrasena.errorMessage.value"
                 label="Contraseña"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Confirmar Contraseña -->
@@ -61,6 +66,7 @@
                 :error-messages="confirmarContrasena.errorMessage.value"
                 label="Confirmar Contraseña"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Nombre de Farmacia -->
@@ -70,6 +76,7 @@
                 :items="nombreFarmaciaItems"
                 label="Nombre de la Farmacia"
                 clearable
+                variant="outlined"
             ></v-select>
 
             <!-- Número de Sucursal -->
@@ -79,6 +86,7 @@
                 :error-messages="numSucursal.errorMessage.value"
                 label="Branch ID"
                 clearable
+                variant="outlined"
             ></v-text-field>
 
             <!-- Dirección -->
@@ -87,6 +95,7 @@
                 :error-messages="direccion.errorMessage.value"
                 label="Address"
                 clearable
+                variant="outlined"
             ></v-text-field>
 
             <!-- Código Postal -->
@@ -96,6 +105,7 @@
                 :error-messages="codigoPostal.errorMessage.value"
                 label="CP"
                 clearable
+                variant="outlined"
             ></v-text-field>
     
             <!-- Términos y condiciones -->
@@ -107,15 +117,22 @@
                 value="1"
             ></v-checkbox>
     
-            <!-- Botón Registrarse -->
-            <v-btn class="me-4" type="submit">
-                Registrarse
-            </v-btn>
-    
-            <!-- Botón reiniciar formulario -->
-            <v-btn @click="handleReset">
-                Borrar Formulario
-            </v-btn>
+            <div class="d-flex align-center text-center justify-space-between flex-column mb-10">
+                <!-- Botón Registrarse -->
+                <v-btn class="my-2" type="submit" color="green" style="width: 100%;">
+                    Registrarse
+                </v-btn>
+                <!-- Botón reiniciar formulario -->
+                <v-btn @click="handleReset" color="red" class="my-2" style="width: 100%;">
+                    Borrar Formulario
+                </v-btn>
+                <!-- Botón para ir al inicio de sesión -->
+                <NuxtLink to="/IniciarSesion" class="my-2" style="width: 100%;">
+                    <v-btn  color="#10A8BF" style="width: 100%;">
+                        ¿Ya tienes cuenta? Inicia Sesión
+                    </v-btn>
+                </NuxtLink>
+            </div>
             </form>
         </v-card>
     </div>
@@ -128,6 +145,9 @@
     
     export default {
     setup() {
+        definePageMeta({
+            layout: false,
+        });
         const mostrarContrasena = ref(false);
         const mostrarConfirmarContrasena = ref(false);
     
