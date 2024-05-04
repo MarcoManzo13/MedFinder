@@ -60,14 +60,25 @@
                     <div v-if="medicinasFiltradas.length > 0">
                         <h2>Medicinas filtradas</h2>
                         <ul style="list-style: none;">
-                            <li v-for="medicine in medicinasFiltradas" :key="medicine._id" class="my-5">
+                            <li v-for="medicine in medicines" :key="medicine.id" class="my-5">
                                 <v-card>
-                                    <v-card-title>{{ medicine.name }}</v-card-title>
+                                    <v-card-title>
+                                        {{ medicine.name }} ${{ medicine.price }}
+                                    </v-card-title>
                                     <div v-for="subtitle in medicine.type" class="d-inline-flex flex-row">
-                                        <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
+                                        <v-card-subtitle>
+                                            {{ subtitle }}
+                                        </v-card-subtitle>
                                     </div>
-                                    <v-card-text>{{ medicine.description }}</v-card-text>
-                                    <v-btn class="ma-5" :to="'/medicines/' + medicine.name"> Ver más</v-btn>
+                                    <v-card-text>
+                                        {{ medicine.description }}
+                                        <br>
+                                        <br>
+                                        Dosis: {{ medicine.dosage }}
+                                        <br>
+                                        <br>
+                                        Cantidad de medicamento en farmacia: {{ medicine.cuantity }}
+                                    </v-card-text>
                                 </v-card>
                             </li>
                         </ul>
