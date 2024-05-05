@@ -6,7 +6,8 @@ const medicineSchema = new mongoose.Schema({
     dosage: String,
     price: Number,
     cuantity: Number,
-    description: String
+    description: String, 
+    favorite: Boolean,
 })
 
 const model = mongoose.model("medicineCreate", medicineSchema);

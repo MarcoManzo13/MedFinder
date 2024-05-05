@@ -22,7 +22,25 @@ export default defineEventHandler(async (event) => {
       console.error('Error creating medicine:', err);
       throw createError({ statusCode: 500, message: 'Failed to create medicine' });
     }
-  } else {
+  }//implementar metodo put
+else if (method === 'PUT') {
+  try {
+    const body = await readBody(event);
+    const medicine = new model(body);
+    console.log('medicine id:', medicine.id);
+    
+    const updatedMedicine = await model.findByIdAndUpdate(medicine.id, body, { new: true });
+    if (!updatedMedicine) {
+      throw createError({ statusCode: 404, message: 'Medicine not found' });
+    }
+    return { message: 'Medicine updated successfully' };
+  } catch (err) {
+    console.error('Error updating medicine:', err);
+    throw createError({ statusCode: 500, message: 'Failed to update medicine' });
+  }
+}
+  
+   else {
       // Manejar otros métodos no soportados
       throw createError({ statusCode: 405, message: 'Method Not Allowed' });
   }
