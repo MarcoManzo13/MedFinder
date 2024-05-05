@@ -1,7 +1,7 @@
 <template>
     <div class="ma-10">
-        <h2 class="mb-5">Favorite Medicines</h2>
-        <ul style="list-style: none;">
+        <h2 class="mb-5 text-center">Medicamentos Favoritos</h2>
+        <ul style="list-style: none;" v-if="favoriteMedicines.length > 0">
             <li v-for="medicine in favoriteMedicines" :key="medicine._id">
                 <v-card class="my-5">
                     <v-card-title>
@@ -27,6 +27,9 @@
                 </v-card>
             </li>
         </ul>
+        <div v-else class="d-flex text-center">
+            <h3>No hay medicamentos favoritos por ahora. Favor the agregarlos en la página de Inicio.</h3>
+        </div>
     </div>
 </template>
 
