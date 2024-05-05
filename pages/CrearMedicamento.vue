@@ -18,6 +18,7 @@
 				multiple
 				variant="outlined"
 				append-inner-icon="mdi-pill-multiple"
+				required
 			/>
 			<v-text-field
 				v-model="medicine.dosage"
@@ -48,6 +49,7 @@
 				auto-grow
 				variant="outlined"
 				append-inner-icon="mdi-text-box-edit"
+				required
 			/>
 			<v-btn type="submit" color="#10A8BF" style="width: 100%;">
 				Añadir Medicamento
@@ -57,6 +59,7 @@
 </template>
 
 <script>
+import { getDatabase, ref, set } from "firebase/database";
 export default {
 	data() {
 		return {
@@ -70,6 +73,7 @@ export default {
 		},
 		showSuccessAlert: false,
 		showErrorAlert: false,
+		ledValue: null,
 		};
 	},
 	methods: {
@@ -91,11 +95,19 @@ export default {
 				cuantity: null,
 				description: '',
 			};
+			// Update LED in Firebase
+			const db = getDatabase(this.$firebaseApp);
+			const ledRef = ref(db, 'led/');
+			set(ledRef, 1);
+    		// Start a timer to turn off LED after 5 seconds
+			setTimeout(() => {
+      			set(ledRef, 0); // Update LED to 0 after delay
+			}, 20000);
 			} catch (err) {
 				console.error('Error creating medicine:', err);
 				this.showErrorAlert = true;
 			}
-		}
+		},
 	}
 };
 </script>

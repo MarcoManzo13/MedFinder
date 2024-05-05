@@ -95,25 +95,25 @@
             <ul style= "list-style: none;">
                 <li v-for="medicine in medicines" :key="medicine.id" class="my-5" v-if="showMedicinas">
                     <v-card>
-    <v-card-title>
-        <div class="d-flex justify-space-between align-center">
-            <div>{{ medicine.name }} ${{ medicine.price }}</div>
-            <v-icon :color="iconColor" @click="toggleLike(medicine)">{{ medicine.favorite ? 'mdi-star' : 'mdi-star-outline' }}</v-icon>
-        </div>
-    </v-card-title>
-    <div v-for="subtitle in medicine.type" class="d-inline-flex flex-row">
-        <v-card-subtitle>
-            {{ subtitle }}
-        </v-card-subtitle>
-    </div>
-    <v-card-text>
-        {{ medicine.description }}
-        <br><br>
-        Dosis: {{ medicine.dosage }}
-        <br><br>
-        Cantidad de medicamento en farmacia: {{ medicine.quantity }}
-    </v-card-text>
-</v-card>
+                        <v-card-title>
+                            <div class="d-flex justify-space-between align-center">
+                                <div>{{ medicine.name }} ${{ medicine.price }}</div>
+                                <v-icon :color="iconColor" @click="toggleLike(medicine)">{{ medicine.favorite ? 'mdi-star' : 'mdi-star-outline' }}</v-icon>
+                            </div>
+                        </v-card-title>
+                        <div v-for="subtitle in medicine.type" class="d-inline-flex flex-row">
+                            <v-card-subtitle>
+                                {{ subtitle }}
+                            </v-card-subtitle>
+                        </div>
+                        <v-card-text>
+                            {{ medicine.description }}
+                            <br><br>
+                            Dosis: {{ medicine.dosage }}
+                            <br><br>
+                            Cantidad de medicamento en farmacia: {{ medicine.quantity }}
+                        </v-card-text>
+                    </v-card>
                 </li>
                 <li v-for="medicine in medicinasFiltradas" :key="medicine.id" class="my-5" v-if="showMedicinesFiltradas">
                     <v-card>
@@ -189,7 +189,6 @@
                 this.showFilters = !this.showFilters;
             },
             toggleLike(medicine) {
-                console.log('Toggling like:', medicine);
                 medicine.favorite = !medicine.favorite;
                 try {
                     const response = fetch(`http://localhost:3000/api/users/medicine`, {
@@ -202,7 +201,6 @@
                 } catch (error) {
                     console.error('Error updating medicine:', error);
                 }
-               
             },
             async aplicarFiltros() {
                 try {

@@ -7,13 +7,11 @@
                 </template>
                 
                 <template v-slot:append>
-                    <v-btn
-                        target="_blank" 
-                        rel="noopener"
-                        href="https://github.com/MarcoManzo13"
-                    >
-                        <Icon name="mdi:star" size="2em" />
-                    </v-btn>
+                    <NuxtLink to="/MedicamentosFavoritos" class="my-2" style="width: 100%;">
+                        <v-btn color="#000" style="width: 100%;">
+                            <Icon name="mdi:star" size="2em" />
+                        </v-btn>
+                    </NuxtLink>
                     <v-img
                         src="../assets/logo.png"
                         :width="30"
