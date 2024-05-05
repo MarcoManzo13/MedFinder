@@ -8,9 +8,10 @@
                 single-line
                 hide-details
                 variant="solo"
+                v-model="search"
                 density="compact"
                 :loading="loading"
-                @click:append-inner="onClickSearch"
+                @click:append-inner="buscar"
                 @click:prepend-inner="onClickFilters"
             />
             <v-card v-if="showFilters">
@@ -92,7 +93,28 @@
         <div class="ma-10">
             <h3>Medicamentos disponibles</h3>
             <ul style= "list-style: none;">
-                <li v-for="medicine in medicines" :key="medicine.id" class="my-5">
+                <li v-for="medicine in medicines" :key="medicine.id" class="my-5" v-if="showMedicinas">
+                    <v-card>
+                        <v-card-title>
+                            {{ medicine.name }} ${{ medicine.price }}
+                        </v-card-title>
+                        <div v-for="subtitle in medicine.type" class="d-inline-flex flex-row">
+                            <v-card-subtitle>
+                                {{ subtitle }}
+                            </v-card-subtitle>
+                        </div>
+                        <v-card-text>
+                            {{ medicine.description }}
+                            <br>
+                            <br>
+                            Dosis: {{ medicine.dosage }}
+                            <br>
+                            <br>
+                            Cantidad de medicamento en farmacia: {{ medicine.cuantity }}
+                        </v-card-text>
+                    </v-card>
+                </li>
+                <li v-for="medicine in medicinasFiltradas" :key="medicine.id" class="my-5" v-if="showMedicinesFiltradas">
                     <v-card>
                         <v-card-title>
                             {{ medicine.name }} ${{ medicine.price }}
@@ -135,6 +157,9 @@
                 filtroDosis: '',
                 medicinasFiltradas: [],
                 filtrosAplicados: false,
+                search: '',
+                showMedicinesFiltradas: false,
+                showMedicinas : true,
 
                 // Variable que almacena los medicamentos que vienen de la base de datos
                 medicines: []
@@ -164,7 +189,8 @@
             async aplicarFiltros() {
                 try {
                   // Filtrar datos localmente
-                    this.medicinasFiltradas = this.medicines.filter(medicine => {
+                    if (this.medicinasFiltradas.length === 0) {
+                        this.medicinasFiltradas = this.medicines.filter(medicine => {
                         let precioValido = true;
                         let dosisValida = true;
                       // Verificar si se aplicaron filtros de precio y dosis
@@ -177,11 +203,50 @@
                         // Retornar true solo si tanto el precio como la dosis son válidos
                         return precioValido && dosisValida;
                     });
+                    } else {
+                        this.medicinasFiltradas = this.medicinasFiltradas.filter(medicine => {
+                        let precioValido = true;
+                        let dosisValida = true;
+                      // Verificar si se aplicaron filtros de precio y dosis
+                        if (this.filtroPrecio) {
+                            precioValido = medicine.price === parseInt(this.filtroPrecio);
+                        }
+                        if (this.filtroDosis) {
+                            dosisValida = medicine.dosage === this.filtroDosis;
+                        }
+                        // Retornar true solo si tanto el precio como la dosis son válidos
+                        return precioValido && dosisValida;
+                    });
+                    }
                     console.log('Medicinas filtradas:', this.medicinasFiltradas);
                 } catch (error) {
                     console.error('Error en fetch:', error);
                 }
             },
+            async buscar() {
+                if(this.search === '') {
+                    this.showMedicinas = true;
+                    this.showMedicinesFiltradas = false;
+                    this.medicinasFiltradas = [];
+                }
+               
+                    if(this.medicinasFiltradas.length === 0) {
+                        this.medicinasFiltradas = this.medicines.filter(medicine => {
+                            //Filtrar por nombre
+                            return medicine.name.toLowerCase().includes(this.search.toLowerCase());
+                        });  
+                        this.showMedicinesFiltradas = true;
+                        this.showMedicinas = false;
+                }else {
+                    this.medicinasFiltradas = this.medicinasFiltradas.filter(medicine => {
+                        //Filtrar por nombre
+                        return medicine.name.toLowerCase().includes(this.search.toLowerCase());
+                    });
+                } 
+                console.log('Buscando:', this.search);
+                console.log('Medicinas:', this.medicines);
+                console.log('Medicinas filtradas:', this.medicinasFiltradas);
+            }
         },
     }
 </script>
