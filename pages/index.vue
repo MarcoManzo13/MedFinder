@@ -72,7 +72,7 @@
                                         </v-card-subtitle>
                                     </div>
                                     <v-card-text>
-                                        {{ medicine.description }}
+                                        <p class="d-flex text-justify">{{ medicine.description }}</p> 
                                         <br>
                                         <br>
                                         Dosis: {{ medicine.dosage }}
@@ -107,11 +107,11 @@
                             </v-card-subtitle>
                         </div>
                         <v-card-text>
-                            {{ medicine.description }}
+                            <p class="d-flex text-justify">{{ medicine.description }}</p> 
                             <br><br>
                             Dosis: {{ medicine.dosage }}
                             <br><br>
-                            Cantidad de medicamento en farmacia: {{ medicine.quantity }}
+                            Cantidad de medicamento en farmacia: {{ medicine.cuantity }}
                         </v-card-text>
                     </v-card>
                 </li>
